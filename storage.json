@@ -1,0 +1,93 @@
+{
+  "games": [
+    {
+      "id": "2025-08-13T10:20:00-04:00",
+      "dt_iso": "2025-08-13T10:20:00-04:00",
+      "opponent": "Red",
+      "roster": {
+        "C": null,
+        "LW": null,
+        "RW": null,
+        "LD": null,
+        "RD": null,
+        "G": null,
+        "UTIL": null,
+        "UTIL2": null
+      },
+      "confirmed": {
+        "C": false,
+        "LW": false,
+        "RW": false,
+        "LD": false,
+        "RD": false,
+        "G": false,
+        "UTIL": false,
+        "UTIL2": false
+      },
+      "posted_requests": {
+        "C": 1405371744549736579,
+        "LW": 1405371746613202954,
+        "RW": 1405371748265885718,
+        "LD": 1405371750862032896,
+        "RD": 1405371752653131878,
+        "G": 1405371754943086642,
+        "UTIL2": 1405371758957039686
+      },
+      "flags": {
+        "dm_6pm": true,
+        "claims_6am": true,
+        "aggressive_2h": true,
+        "util_promoted_1h": true,
+        "t30_done": true,
+        "final_call": true
+      },
+      "lineup_message_id": 1405371451141525565,
+      "thread_id": 1405371451141525565,
+      "status": "past"
+    },
+    {
+      "id": "2025-08-08T23:45:00-04:00",
+      "dt_iso": "2025-08-08T23:45:00-04:00",
+      "opponent": "Red team",
+      "roster": {
+        "C": null,
+        "LW": null,
+        "RW": null,
+        "LD": null,
+        "RD": null,
+        "G": null,
+        "UTIL": null,
+        "UTIL2": null
+      },
+      "confirmed": {
+        "C": false,
+        "LW": false,
+        "RW": false,
+        "LD": false,
+        "RD": false,
+        "G": false,
+        "UTIL": false,
+        "UTIL2": false
+      },
+      "posted_requests": {
+        "C": 1405394472409239652,
+        "LW": 1405394475047587881,
+        "RW": 1405394476998066336,
+        "LD": 1405394478331727934,
+        "RD": 1405394481036918929,
+        "G": 1405394482605850654
+      },
+      "flags": {
+        "dm_6pm": true,
+        "claims_6am": true,
+        "aggressive_2h": true,
+        "util_promoted_1h": true,
+        "t30_done": true,
+        "final_call": true
+      },
+      "lineup_message_id": 1405393986524549220,
+      "thread_id": 1405393986524549220,
+      "status": "past"
+    }
+  ]
+}
