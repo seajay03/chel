@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mazda Gaspé Job Tracker</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="job-tracker.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">Mazda Gaspé Job Tracker</div>
+    <div class="pwa-hint">Installable • Offline-ready</div>
+  </header>
+
+  <main>
+    <section id="welcome-screen" class="card">
+      <h1>Welcome</h1>
+      <p>Select your workspace</p>
+      <div class="welcome-actions">
+        <button id="go-garage" class="primary">🚗 Garage View (Technicians)</button>
+        <button id="go-service" class="accent">🛠 Service Department (Managers)</button>
+      </div>
+    </section>
+
+    <section id="technician-view" class="card hidden">
+      <header class="section-header">
+        <h2>Technician Schedule</h2>
+        <div class="qr-area">
+          <label for="qr-technician">QR for technician page</label>
+          <select id="qr-technician"></select>
+          <img id="qr-preview" alt="QR code" />
+        </div>
+      </header>
+      <div class="filters">
+        <label>Technician
+          <select id="tech-filter"></select>
+        </label>
+        <label>Date
+          <input type="date" id="date-filter">
+        </label>
+        <label>Status
+          <select id="tech-status-filter">
+            <option value="">All</option>
+            <option>Waiting</option>
+            <option>In Progress</option>
+            <option>Done</option>
+            <option>Abandoned</option>
+            <option>No-Show</option>
+          </select>
+        </label>
+      </div>
+      <div id="tech-cards" class="card-grid"></div>
+    </section>
+
+    <section id="manager-login" class="card hidden">
+      <h2>Manager Login</h2>
+      <label>Password
+        <input type="password" id="manager-password" placeholder="mazda123">
+      </label>
+      <button id="login-btn" class="primary">Unlock Dashboard</button>
+      <p id="login-error" class="error"></p>
+    </section>
+
+    <section id="manager-dashboard" class="card hidden">
+      <header class="section-header">
+        <h2>Service Department Dashboard</h2>
+        <div class="actions">
+          <button id="export-csv">📤 Export CSV</button>
+          <button id="export-pdf">🖨️ Export PDF</button>
+          <button id="pwa-install" class="accent">⬇️ Install App</button>
+        </div>
+      </header>
+      <div class="filters">
+        <label>Technician
+          <select id="manager-tech-filter"></select>
+        </label>
+        <label>Status
+          <select id="manager-status-filter">
+            <option value="">All</option>
+            <option>Waiting</option>
+            <option>In Progress</option>
+            <option>Done</option>
+            <option>Abandoned</option>
+            <option>No-Show</option>
+          </select>
+        </label>
+        <label>Priority
+          <select id="priority-filter">
+            <option value="">All</option>
+            <option>Urgent</option>
+            <option>Normal</option>
+            <option>Low</option>
+          </select>
+        </label>
+        <label>Date
+          <input type="date" id="manager-date-filter">
+        </label>
+      </div>
+
+      <div class="dashboard">
+        <form id="job-form" class="card">
+          <div class="form-grid">
+            <label>Client name<input id="client" required></label>
+            <label>Vehicle<input id="vehicle" placeholder="Make / Model"></label>
+            <label>Stock #<input id="stock"></label>
+            <label>Technician<select id="technician"></select></label>
+            <label>Date<input type="date" id="date" required></label>
+            <label>Time<input type="time" id="time" required></label>
+            <label>Duration (hrs)<input type="number" id="duration" min="0.25" step="0.25" value="1"></label>
+            <label>Status<select id="status">
+              <option>Waiting</option>
+              <option>In Progress</option>
+              <option>Done</option>
+              <option>Abandoned</option>
+              <option>No-Show</option>
+            </select></label>
+            <label>Priority<select id="priority">
+              <option>Urgent</option>
+              <option selected>Normal</option>
+              <option>Low</option>
+            </select></label>
+            <label>Job template<select id="template"></select></label>
+          </div>
+
+          <div id="task-selectors" class="task-grid"></div>
+          <label>Notes<textarea id="notes" rows="3"></textarea></label>
+
+          <div class="form-actions">
+            <button type="submit" class="primary" id="save-job">Save job</button>
+            <button type="button" id="reset-form">Clear</button>
+          </div>
+          <p id="overlap-warning" class="warning"></p>
+        </form>
+
+        <div class="calendar">
+          <div class="calendar-header">
+            <h3>Calendar (drag to reschedule)</h3>
+            <div id="hours-summary"></div>
+          </div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="job-tracker.js"></script>
+</body>
+</html>
