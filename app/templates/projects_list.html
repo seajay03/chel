@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="mb-0">Projects</h2>
+    <p class="text-muted small">Boutique workflows across Kaido 132</p>
+  </div>
+  <a href="{{ url_for('main.new_project') }}" class="btn btn-beige">New Project</a>
+</div>
+<div class="card bg-midnight border-0 shadow-sm">
+  <div class="card-body">
+    <form class="row g-2 align-items-center mb-3">
+      <div class="col-md-3">
+        <select name="category" class="form-select" onchange="this.form.submit()">
+          <option value="">All Categories</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}" {% if selected_category==cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="Search by name" name="search" value="{{ search or '' }}">
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-outline-light w-100" type="submit">Filter</button>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Assigned</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+            <tr>
+              <td><a href="{{ url_for('main.project_detail', project_id=project.id) }}" class="link-light">{{ project.name }}</a></td>
+              <td>{{ project.category }}</td>
+              <td><span class="badge bg-status-{{ project.status|lower|replace(' ', '-') }}">{{ project.status }}</span></td>
+              <td>{{ project.assigned_user.name if project.assigned_user else '—' }}</td>
+              <td>{{ project.created_at.strftime('%Y-%m-%d') }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-center text-muted">No projects yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">Create User</h2>
+<div class="card bg-midnight border-0 shadow-sm">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="is_admin" id="is_admin">
+            <label class="form-check-label" for="is_admin">Admin</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-beige mt-3" type="submit">Create</button>
+      <a href="{{ url_for('main.users_list') }}" class="btn btn-outline-light mt-3 ms-2">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

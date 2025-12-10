@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="mb-0">{{ project.name }}</h2>
+    <p class="text-muted small">{{ project.category }} • Status: <span class="badge bg-status-{{ project.status|lower|replace(' ', '-') }}">{{ project.status }}</span></p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('main.edit_project', project_id=project.id) }}" class="btn btn-outline-light">Edit</a>
+    <a href="{{ url_for('main.new_task', project_id=project.id) }}" class="btn btn-beige">Add Task</a>
+  </div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="card bg-midnight border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Project Info</h5>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="text-muted small">Assigned To</div>
+            <div>{{ project.assigned_user.name if project.assigned_user else 'Unassigned' }}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-muted small">Dates</div>
+            <div>Start: {{ project.start_date or '—' }} | Due: {{ project.due_date or '—' }}</div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="text-muted small">Description</div>
+          <div>{{ project.description or 'No description yet.' }}</div>
+        </div>
+        <div class="mb-2">
+          <div class="text-muted small">Customer Tracking Link</div>
+          <div class="p-2 bg-dark rounded border border-secondary small">{{ tracking_url }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-midnight border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Tasks</h5>
+        <div class="row g-3">
+          {% for status, tasks in tasks_by_status.items() %}
+            <div class="col-md-4">
+              <h6 class="text-uppercase small text-muted">{{ status }}</h6>
+              <div class="list-group list-group-flush">
+                {% for task in tasks %}
+                  <div class="list-group-item bg-dark text-light mb-2 rounded">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="fw-semibold">{{ task.title }}</div>
+                        <div class="small text-muted">{{ task.assigned_user.name if task.assigned_user else 'Unassigned' }}</div>
+                        {% if task.due_date %}<div class="small">Due {{ task.due_date }}</div>{% endif %}
+                      </div>
+                      <div class="btn-group btn-group-sm">
+                        <form method="post" action="{{ url_for('main.update_task_status', task_id=task.id, status='Todo') }}">
+                          <button class="btn btn-outline-light" type="submit">Todo</button>
+                        </form>
+                        <form method="post" action="{{ url_for('main.update_task_status', task_id=task.id, status='In Progress') }}">
+                          <button class="btn btn-outline-light" type="submit">Progress</button>
+                        </form>
+                        <form method="post" action="{{ url_for('main.update_task_status', task_id=task.id, status='Done') }}">
+                          <button class="btn btn-outline-light" type="submit">Done</button>
+                        </form>
+                      </div>
+                    </div>
+                    {% if task.description %}<div class="small mt-1">{{ task.description }}</div>{% endif %}
+                    <a href="{{ url_for('main.edit_task', task_id=task.id) }}" class="small d-inline-block mt-2">Edit</a>
+                  </div>
+                {% else %}
+                  <div class="text-muted small">No tasks in this column.</div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card bg-midnight border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Photos</h5>
+        {% if project.cover_image_path %}
+          <div class="mb-3">
+            <div class="text-muted small">Cover Image</div>
+            <img src="{{ url_for('main.uploaded_file', filename=project.cover_image_path) }}" class="img-fluid rounded" alt="Cover">
+          </div>
+        {% endif %}
+        <form action="{{ url_for('main.upload_photo', project_id=project.id) }}" method="post" enctype="multipart/form-data" class="mb-3">
+          <label class="form-label">Upload photos</label>
+          <input class="form-control" type="file" name="photos" accept="image/*" multiple required>
+          <button class="btn btn-outline-light w-100 mt-2" type="submit">Upload</button>
+        </form>
+        <div class="row g-2">
+          {% for photo in project.photos %}
+            <div class="col-6">
+              <a href="{{ url_for('main.uploaded_file', filename=photo.file_path) }}" target="_blank">
+                <img src="{{ url_for('main.uploaded_file', filename=photo.file_path) }}" class="img-fluid rounded" alt="photo">
+              </a>
+            </div>
+          {% else %}
+            <p class="text-muted small">No photos yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

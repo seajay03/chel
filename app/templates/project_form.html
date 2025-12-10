@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">{{ 'Edit Project' if project else 'New Project' }}</h2>
+<div class="card bg-midnight border-0 shadow-sm">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" value="{{ project.name if project else '' }}" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Category</label>
+          <select name="category" class="form-select" required>
+            {% for cat in categories %}
+              <option value="{{ cat }}" {% if project and project.category==cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Status</label>
+          <select name="status" class="form-select">
+            {% for status in ['Open','In Progress','On Hold','Completed'] %}
+              <option value="{{ status }}" {% if project and project.status==status %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Assigned To</label>
+          <select name="assigned_to" class="form-select">
+            <option value="">Unassigned</option>
+            {% for user in users %}
+              <option value="{{ user.id }}" {% if project and project.assigned_to==user.id %}selected{% endif %}>{{ user.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Start Date</label>
+          <input type="date" name="start_date" class="form-control" value="{{ project.start_date }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Due Date</label>
+          <input type="date" name="due_date" class="form-control" value="{{ project.due_date }}">
+        </div>
+        <div class="col-12">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" rows="4">{{ project.description if project else '' }}</textarea>
+        </div>
+      </div>
+      <button class="btn btn-beige mt-3" type="submit">Save</button>
+      <a href="{{ url_for('main.projects_list') }}" class="btn btn-outline-light mt-3 ms-2">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

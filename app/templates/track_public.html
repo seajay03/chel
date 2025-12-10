@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track — Kaido 132</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="bg-dark text-light">
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <img src="{{ url_for('static', filename='img/kaido132_logo.png') }}" alt="Kaido 132" class="logo-large mb-2">
+      <h1 class="h4">Project Status</h1>
+    </div>
+    <div class="card bg-midnight border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h2 class="h5 mb-1">{{ project.name }}</h2>
+        <p class="text-muted small mb-2">{{ project.category }}</p>
+        <p>Status: <span class="badge bg-status-{{ project.status|lower|replace(' ', '-') }}">{{ project.status }}</span></p>
+        {% if project.description %}<p class="mb-0">{{ project.description }}</p>{% endif %}
+      </div>
+    </div>
+    <div class="card bg-midnight border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Recent Tasks</h5>
+        {% for status, tasks in tasks_by_status.items() %}
+          <div class="mb-2">
+            <div class="text-muted text-uppercase small">{{ status }}</div>
+            {% for task in tasks %}
+              <div class="bg-dark rounded p-2 mb-2">
+                <div class="fw-semibold">{{ task.title }}</div>
+                {% if task.description %}<div class="small text-muted">{{ task.description }}</div>{% endif %}
+                {% if task.due_date %}<div class="small">Due {{ task.due_date }}</div>{% endif %}
+              </div>
+            {% else %}
+              <div class="text-muted small">No tasks here.</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="card bg-midnight border-0 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Photos</h5>
+        {% if project.cover_image_path %}
+          <img src="{{ url_for('main.uploaded_file', filename=project.cover_image_path) }}" class="img-fluid rounded mb-3" alt="Cover">
+        {% endif %}
+        <div class="row g-2">
+          {% for photo in project.photos %}
+            <div class="col-6">
+              <a href="{{ url_for('main.uploaded_file', filename=photo.file_path) }}" target="_blank">
+                <img src="{{ url_for('main.uploaded_file', filename=photo.file_path) }}" class="img-fluid rounded" alt="photo">
+              </a>
+            </div>
+          {% else %}
+            <p class="text-muted small">No photos yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
