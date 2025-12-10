@@ -1,2 +1,7 @@
-node_modules
+__pycache__/
+*.pyc
+venv/
 .env
+kaido132.db
+uploads/
+node_modules/

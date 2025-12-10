@@ -1,0 +1,86 @@
+body {
+  background: #0f1115;
+  color: #f3ead7;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.navbar {
+  background: #0c0e12;
+  border-bottom: 1px solid #1f2a2f;
+}
+
+.bg-midnight {
+  background: #11151b;
+}
+
+.btn-beige {
+  background: #d9c3a1;
+  color: #0f1115;
+  border: none;
+}
+
+.btn-beige:hover {
+  background: #c8b38f;
+  color: #0f1115;
+}
+
+.logo-small {
+  height: 32px;
+}
+
+.logo-large {
+  height: 72px;
+}
+
+.login-card {
+  background: #11151b;
+  border: 1px solid #1f2a2f;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.table thead th {
+  border-color: #1f2a2f;
+}
+
+.table tbody tr {
+  border-color: #1f2a2f;
+}
+
+.bg-status-open { background: #17a2b8 !important; }
+.bg-status-in-progress { background: #ffc107 !important; color: #0f1115; }
+.bg-status-on-hold { background: #6c757d !important; }
+.bg-status-completed { background: #28a745 !important; }
+.bg-status-done { background: #28a745 !important; }
+.bg-status-todo { background: #495057 !important; }
+
+.card {
+  border-radius: 14px;
+}
+
+.form-control, .form-select {
+  background-color: #0c0e12;
+  color: #f3ead7;
+  border-color: #1f2a2f;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #0c0e12;
+  color: #f3ead7;
+  border-color: #d9c3a1;
+  box-shadow: 0 0 0 0.2rem rgba(217,195,161,0.25);
+}
+
+.btn-outline-light {
+  color: #f3ead7;
+  border-color: #d9c3a1;
+}
+
+.btn-outline-light:hover {
+  background: #d9c3a1;
+  color: #0f1115;
+}
+
+a { color: #d9c3a1; }
+a:hover { color: #c8b38f; }
