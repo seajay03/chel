@@ -1,5 +1,24 @@
 {
   "prefix": "!",
-  "lineupChannelId": "1403600024927076407",
-  "generalChannelId": "1228418184403615796"
+  "channels": {
+    "practice": "REPLACE_WITH_PRACTICE_CHANNEL_ID",
+    "game": "REPLACE_WITH_GAME_CHANNEL_ID"
+  },
+  "lineupChannelId": "REPLACE_WITH_DEFAULT_CHANNEL_ID",
+  "roles": {
+    "6s": {
+      "center": "ROLE_ID_CENTER_6S",
+      "leftWing": "ROLE_ID_LEFT_WING_6S",
+      "rightWing": "ROLE_ID_RIGHT_WING_6S",
+      "leftDefense": "ROLE_ID_LEFT_DEFENSE_6S",
+      "rightDefense": "ROLE_ID_RIGHT_DEFENSE_6S",
+      "goalie": "ROLE_ID_GOALIE_6S"
+    },
+    "4s": {
+      "center": "ROLE_ID_CENTER_4S",
+      "wing": "ROLE_ID_WING_4S",
+      "defense": "ROLE_ID_DEFENSE_4S",
+      "goalie": "ROLE_ID_GOALIE_4S"
+    }
+  }
 }
